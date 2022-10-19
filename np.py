@@ -1,5 +1,8 @@
 #!/usr/bin/python
 # python np.py blah.gnmap http
+# python np.py blah.gnmap smb > smb/targets.txt
+# for i in http smb ssl dns; do mkdir $i; python np.py blah.gnmap $i > $i/targets.txt;done
+
 from sys import argv
 
 filename = argv[1]
@@ -21,7 +24,7 @@ with open(filename, "r") as nmap_file:
         split_line = port_info.split(" ")[1:]
         for i in split_line:
             single_port_info = i.split("/") # number, status, protocol, blank, service name, rpc_info, version info
-            if service in single_port_info[4].split("|"): # catches service labels like "ssl|https" without also including things like "http"
+            if lower(service) in single_port_info[4].split("|"): # catches service labels like "ssl|https" without also including things like "http"
                 print("{}:{}".format(ip, single_port_info[0])) # ip:port
         
         
