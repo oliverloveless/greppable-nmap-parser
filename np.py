@@ -2,6 +2,7 @@
 # python np.py blah.gnmap http
 # python np.py blah.gnmap smb > smb/targets.txt
 # for i in http smb ssl dns; do mkdir $i; python np.py blah.gnmap $i > $i/targets.txt;done
+# cat test.gnmap | np.py http | tee http/targets.txt
 
 
 from sys import argv, stdin
