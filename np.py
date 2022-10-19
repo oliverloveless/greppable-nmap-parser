@@ -23,7 +23,7 @@ def parse_file(nmap_file, service):
         split_line = port_info.split(" ")[1:]
         for i in split_line:
             single_port_info = i.split("/") # number, status, protocol, blank, service name, rpc_info, version info
-            if service in single_port_info[4].split("|"): # catches service labels like "ssl|https" without also including things like "http"
+            if service.lower() in single_port_info[4].split("|"): # catches service labels like "ssl|https" without also including things like "http"
                 print("{}:{}".format(ip, single_port_info[0])) # ip:port
         
 if not stdin.isatty():
